@@ -1,0 +1,2591 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+<title>XO Online</title>
+
+<style>
+*{
+ box-sizing:border-box;
+ -webkit-tap-highlight-color:transparent
+}
+
+html,body{
+ margin:0;
+ width:100%;
+ min-height:100%
+}
+
+body{
+ min-height:100vh;
+ font-family:Arial,Tahoma,sans-serif;
+ background:
+ radial-gradient(circle at top,#18234b 0,#080b18 55%,#05060d 100%);
+ color:#fff;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ padding:14px
+}
+
+button,input{
+ font-family:inherit
+}
+
+button{
+ user-select:none;
+ -webkit-user-select:none;
+ cursor:pointer
+}
+
+.app{
+ width:100%;
+ max-width:430px
+}
+
+.logo{
+ text-align:center;
+ font-size:52px;
+ font-weight:900;
+ margin-bottom:2px;
+ background:linear-gradient(90deg,#7c6cff,#00e5ff);
+ -webkit-background-clip:text;
+ background-clip:text;
+ color:transparent
+}
+
+.subtitle{
+ text-align:center;
+ color:#9da9c9;
+ margin-bottom:18px;
+ font-size:15px
+}
+
+.card{
+ width:100%;
+ background:rgba(19,26,50,.96);
+ border:1px solid rgba(255,255,255,.09);
+ border-radius:25px;
+ padding:18px;
+ box-shadow:0 20px 55px rgba(0,0,0,.45)
+}
+
+input{
+ width:100%;
+ height:52px;
+ border:1px solid rgba(255,255,255,.08);
+ outline:none;
+ border-radius:15px;
+ background:#090f22;
+ color:#fff;
+ font-size:16px;
+ padding:0 15px;
+ text-align:center;
+ margin-bottom:10px
+}
+
+input:focus{
+ border-color:#6c63ff
+}
+
+button{
+ width:100%;
+ min-height:50px;
+ border:0;
+ border-radius:15px;
+ color:white;
+ font-size:16px;
+ font-weight:bold;
+ margin-top:8px;
+ background:linear-gradient(135deg,#665cff,#00bcd4);
+ transition:.15s
+}
+
+button:active{
+ transform:scale(.97)
+}
+
+.secondary{
+ background:#252e4d
+}
+
+.danger{
+ background:#a52d4c
+}
+
+.copy{
+ background:#222c4b;
+ margin-top:10px
+}
+
+.hidden{
+ display:none!important
+}
+
+.status{
+ text-align:center;
+ min-height:24px;
+ margin:14px 0 0;
+ color:#aeb9d5;
+ font-size:14px
+}
+
+.room{
+ text-align:center;
+ background:#090f22;
+ border-radius:17px;
+ padding:13px;
+ margin-bottom:13px
+}
+
+.room-title{
+ color:#9da9c9;
+ font-size:13px;
+ margin-bottom:5px
+}
+
+.room-code{
+ color:#00e5ff;
+ font-size:29px;
+ font-weight:900;
+ letter-spacing:6px
+}
+
+.players{
+ display:flex;
+ gap:9px
+}
+
+.player{
+ flex:1;
+ min-width:0;
+ padding:12px 7px;
+ background:#090f22;
+ border-radius:16px;
+ text-align:center;
+ border:2px solid transparent
+}
+
+.player.active{
+ border-color:#00e5ff;
+ box-shadow:0 0 15px rgba(0,229,255,.15)
+}
+
+.player-icon{
+ font-size:25px
+}
+
+.player-name{
+ overflow:hidden;
+ text-overflow:ellipsis;
+ white-space:nowrap;
+ margin-top:4px;
+ font-weight:bold
+}
+
+.message{
+ text-align:center;
+ min-height:27px;
+ margin:13px 0 7px;
+ font-size:17px;
+ font-weight:bold
+}
+
+.board{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:9px;
+ margin:8px 0 13px
+}
+
+.cell{
+ width:100%;
+ aspect-ratio:1/1;
+ min-height:80px;
+ margin:0;
+ padding:0;
+ border-radius:18px;
+ background:#080e20;
+ border:1px solid rgba(255,255,255,.06);
+ font-size:48px;
+ font-weight:900;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ box-shadow:inset 0 0 15px rgba(0,0,0,.2)
+}
+
+.cell.x{
+ color:#766bff
+}
+
+.cell.o{
+ color:#00e5ff
+}
+
+.cell.win{
+ background:linear-gradient(135deg,#274c5b,#303464);
+ border-color:#00e5ff
+}
+
+.cell:disabled{
+ opacity:1
+}
+
+.info{
+ display:flex;
+ justify-content:space-between;
+ color:#9da9c9;
+ font-size:13px;
+ margin-bottom:4px
+}
+
+/* CAMERA */
+
+.camera-box{
+ margin-top:15px;
+ padding:12px;
+ background:#090f22;
+ border-radius:18px;
+ border:1px solid rgba(255,255,255,.07)
+}
+
+.camera-title{
+ text-align:center;
+ font-size:15px;
+ font-weight:bold;
+ margin-bottom:10px
+}
+
+.videos{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:8px
+}
+
+.video-card{
+ position:relative;
+ width:100%;
+ aspect-ratio:3/4;
+ background:#02040b;
+ border-radius:15px;
+ overflow:hidden;
+ border:1px solid rgba(255,255,255,.08)
+}
+
+.video-card video{
+ width:100%;
+ height:100%;
+ object-fit:cover;
+ display:block;
+ background:#02040b
+}
+
+.video-label{
+ position:absolute;
+ bottom:7px;
+ right:7px;
+ left:7px;
+ background:rgba(0,0,0,.55);
+ backdrop-filter:blur(5px);
+ border-radius:9px;
+ padding:6px;
+ text-align:center;
+ font-size:12px;
+ z-index:2
+}
+
+.camera-status{
+ text-align:center;
+ min-height:22px;
+ color:#9da9c9;
+ font-size:12px;
+ margin-top:9px
+}
+
+.camera-button{
+ margin-top:7px;
+ background:linear-gradient(135deg,#5d50ff,#00aeca)
+}
+
+.camera-button.off{
+ background:#252e4d
+}
+
+.small{
+ text-align:center;
+ color:#697594;
+ font-size:12px;
+ margin-top:14px
+}
+
+#joinBox{
+ margin-top:8px
+}
+
+@media(max-width:360px){
+
+ .card{
+  padding:14px
+ }
+
+ .cell{
+  min-height:70px;
+  font-size:42px
+ }
+
+ .logo{
+  font-size:45px
+ }
+
+ .video-label{
+  font-size:10px
+ }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="logo">XO</div>
+
+<div class="subtitle">
+لعبة XO أونلاين 🎮
+</div>
+
+
+<!-- HOME -->
+
+<div id="home" class="card">
+
+<input
+ id="nameInput"
+ maxlength="18"
+ autocomplete="off"
+ placeholder="اكتب اسمك">
+
+<button onclick="createRoom()">
+🎮 إنشاء غرفة
+</button>
+
+<button
+ class="secondary"
+ onclick="showJoin()">
+🔗 الانضمام إلى غرفة
+</button>
+
+
+<div id="joinBox" class="hidden">
+
+<input
+ id="roomInput"
+ maxlength="6"
+ autocomplete="off"
+ placeholder="أدخل كود الغرفة">
+
+<button onclick="joinRoom()">
+🚀 دخول الغرفة
+</button>
+
+</div>
+
+
+<div id="homeStatus" class="status"></div>
+
+<div class="small">
+العب مع صديقك من هاتفين مختلفين 🌐
+</div>
+
+</div>
+
+
+
+<!-- GAME -->
+
+<div id="game" class="card hidden">
+
+
+<div class="room">
+
+<div class="room-title">
+كود الغرفة
+</div>
+
+<div id="roomCode" class="room-code">
+------
+</div>
+
+<button
+ class="copy"
+ onclick="copyRoomCode()">
+📋 نسخ كود الغرفة
+</button>
+
+</div>
+
+
+
+<div class="players">
+
+<div id="playerX" class="player">
+
+<div class="player-icon">
+❌
+</div>
+
+<div id="nameX" class="player-name">
+انتظار...
+</div>
+
+</div>
+
+
+<div id="playerO" class="player">
+
+<div class="player-icon">
+⭕
+</div>
+
+<div id="nameO" class="player-name">
+انتظار...
+</div>
+
+</div>
+
+</div>
+
+
+
+<div id="message" class="message">
+بانتظار اللاعب الثاني...
+</div>
+
+
+
+<div class="board">
+
+<button class="cell" onclick="play(0)"></button>
+<button class="cell" onclick="play(1)"></button>
+<button class="cell" onclick="play(2)"></button>
+
+<button class="cell" onclick="play(3)"></button>
+<button class="cell" onclick="play(4)"></button>
+<button class="cell" onclick="play(5)"></button>
+
+<button class="cell" onclick="play(6)"></button>
+<button class="cell" onclick="play(7)"></button>
+<button class="cell" onclick="play(8)"></button>
+
+</div>
+
+
+
+<div class="info">
+
+<span id="mySymbol">
+رمزك: -
+</span>
+
+<span id="turnInfo">
+الدور: -
+</span>
+
+</div>
+
+
+
+<!-- CAMERA -->
+
+<div class="camera-box">
+
+<div class="camera-title">
+📹 الكاميرا والمحادثة
+</div>
+
+
+<div class="videos">
+
+<div class="video-card">
+
+<video
+ id="localVideo"
+ autoplay
+ muted
+ playsinline>
+</video>
+
+<div class="video-label">
+📱 أنت
+</div>
+
+</div>
+
+
+<div class="video-card">
+
+<video
+ id="remoteVideo"
+ autoplay
+ playsinline>
+</video>
+
+<div class="video-label">
+👤 صديقك
+</div>
+
+</div>
+
+</div>
+
+
+<div id="cameraStatus" class="camera-status">
+اضغط تشغيل الكاميرا
+</div>
+
+
+<button
+ id="cameraBtn"
+ class="camera-button"
+ onclick="toggleCamera()">
+
+📹 تشغيل الكاميرا
+
+</button>
+
+</div>
+
+
+
+<button onclick="newGame()">
+🔄 مباراة جديدة
+</button>
+
+
+<button
+ class="danger"
+ onclick="leaveRoom()">
+🚪 مغادرة الغرفة
+</button>
+
+
+</div>
+
+</div>
+
+
+
+<script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-database-compat.js"></script>
+
+
+<script>
+
+const firebaseConfig = {
+
+ apiKey:"AIzaSyDY2odtqfikOFiImAFUPAivKxex053rWGw",
+
+ authDomain:"xo-ga-13a1e.firebaseapp.com",
+
+ databaseURL:"https://xo-ga-13a1e-default-rtdb.firebaseio.com",
+
+ projectId:"xo-ga-13a1e",
+
+ storageBucket:"xo-ga-13a1e.firebasestorage.app",
+
+ messagingSenderId:"708857601181",
+
+ appId:"1:708857601181:web:8b0b3ba2920df3a7c64874",
+
+ measurementId:"G-S4SBWVYJEC"
+
+};
+
+
+firebase.initializeApp(firebaseConfig);
+
+const db=firebase.database();
+
+
+let roomId=null;
+let myPlayer=null;
+let playerName="";
+let gameData=null;
+let roomListener=null;
+
+const cells=document.querySelectorAll(".cell");
+
+
+
+/* =========================
+   WEBRTC CAMERA + AUDIO
+========================= */
+
+let peerConnection=null;
+let localStream=null;
+
+let cameraEnabled=false;
+
+let remoteCandidates=[];
+
+let cameraListenersStarted=false;
+
+let offerCreated=false;
+
+let answerCreated=false;
+
+
+const rtcConfig={
+
+ iceServers:[
+
+  {
+   urls:"stun:stun.l.google.com:19302"
+  }
+
+ ]
+
+};
+
+
+
+/* =========================
+   ROOM
+========================= */
+
+function randomRoom(){
+
+ const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+ let result="";
+
+ for(let i=0;i<6;i++){
+
+  result+=chars.charAt(
+   Math.floor(Math.random()*chars.length)
+  );
+
+ }
+
+ return result;
+
+}
+
+
+
+function getName(){
+
+ const input=document.getElementById("nameInput");
+
+ const name=input.value.trim();
+
+ if(!name){
+
+  showHomeStatus("⚠️ اكتب اسمك أولاً");
+
+  input.focus();
+
+  return null;
+
+ }
+
+ return name;
+
+}
+
+
+
+function showHomeStatus(text){
+
+ document.getElementById("homeStatus").textContent=text;
+
+}
+
+
+
+window.showJoin=function(){
+
+ document
+  .getElementById("joinBox")
+  .classList.remove("hidden");
+
+ document
+  .getElementById("roomInput")
+  .focus();
+
+};
+
+
+
+/* =========================
+   CREATE ROOM
+========================= */
+
+window.createRoom=async function(){
+
+ const name=getName();
+
+ if(!name)return;
+
+ playerName=name;
+
+ showHomeStatus("⏳ جاري إنشاء الغرفة...");
+
+ try{
+
+  let code=null;
+
+  let roomRef=null;
+
+
+  for(let i=0;i<10;i++){
+
+   const possibleCode=randomRoom();
+
+   const possibleRef=
+    db.ref("rooms/"+possibleCode);
+
+   const snapshot=
+    await possibleRef.once("value");
+
+
+   if(!snapshot.exists()){
+
+    code=possibleCode;
+
+    roomRef=possibleRef;
+
+    break;
+
+   }
+
+  }
+
+
+  if(!code){
+
+   throw new Error("تعذر إنشاء الغرفة");
+
+  }
+
+
+  roomId=code;
+
+  myPlayer="X";
+
+
+  await roomRef.set({
+
+   playerX:{
+    name:playerName,
+    online:true
+   },
+
+   playerO:null,
+
+   board:[
+    "","","",
+    "","","",
+    "","",""
+   ],
+
+   turn:"X",
+
+   winner:"",
+
+   status:"waiting",
+
+   createdAt:
+    firebase.database.ServerValue.TIMESTAMP
+
+  });
+
+
+  enterGame();
+
+  listenRoom();
+
+ }catch(error){
+
+  console.error(error);
+
+  showHomeStatus(
+   "❌ "+(error.code||error.message)
+  );
+
+ }
+
+};
+
+
+
+/* =========================
+   JOIN ROOM
+========================= */
+
+window.joinRoom=async function(){
+
+ const name=getName();
+
+ if(!name)return;
+
+
+ const code=
+  document
+   .getElementById("roomInput")
+   .value
+   .trim()
+   .toUpperCase();
+
+
+ if(code.length!==6){
+
+  showHomeStatus(
+   "⚠️ كود الغرفة يجب أن يكون 6 أحرف"
+  );
+
+  return;
+
+ }
+
+
+ playerName=name;
+
+ showHomeStatus("⏳ جاري الدخول...");
+
+
+ try{
+
+  const roomRef=
+   db.ref("rooms/"+code);
+
+  const snapshot=
+   await roomRef.once("value");
+
+
+  if(!snapshot.exists()){
+
+   showHomeStatus(
+    "❌ الغرفة غير موجودة"
+   );
+
+   return;
+
+  }
+
+
+  const data=snapshot.val();
+
+
+  if(data.playerO){
+
+   showHomeStatus(
+    "❌ الغرفة ممتلئة"
+   );
+
+   return;
+
+  }
+
+
+  await roomRef.update({
+
+   playerO:{
+    name:playerName,
+    online:true
+   },
+
+   status:"playing"
+
+  });
+
+
+  roomId=code;
+
+  myPlayer="O";
+
+
+  enterGame();
+
+  listenRoom();
+
+
+ }catch(error){
+
+  console.error(error);
+
+  showHomeStatus(
+   "❌ "+(error.code||error.message)
+  );
+
+ }
+
+};
+
+
+
+function enterGame(){
+
+ document
+  .getElementById("home")
+  .classList.add("hidden");
+
+
+ document
+  .getElementById("game")
+  .classList.remove("hidden");
+
+
+ document
+  .getElementById("roomCode")
+  .textContent=roomId;
+
+
+ setCameraStatus(
+  "📹 اضغط تشغيل الكاميرا حتى تبدأ الكاميرا والصوت"
+ );
+
+}
+
+
+
+/* =========================
+   LISTEN ROOM
+========================= */
+
+function listenRoom(){
+
+ if(roomListener)
+  roomListener.off();
+
+
+ roomListener=
+  db.ref("rooms/"+roomId);
+
+
+ roomListener.on(
+  "value",
+  async function(snapshot){
+
+   if(!snapshot.exists()){
+
+    stopCamera();
+
+    alert("تم حذف الغرفة");
+
+    location.reload();
+
+    return;
+
+   }
+
+
+   gameData=snapshot.val();
+
+   render();
+
+
+   if(
+    gameData.playerX &&
+    gameData.playerO
+   ){
+
+    startCameraListeners();
+
+
+    if(cameraEnabled){
+
+     if(myPlayer==="X"){
+
+      await createOffer();
+
+     }else{
+
+      await checkExistingOffer();
+
+     }
+
+    }
+
+   }
+
+  }
+ );
+
+}
+
+
+
+/* =========================
+   RENDER GAME
+========================= */
+
+function render(){
+
+ if(!gameData)return;
+
+
+ document
+  .getElementById("nameX")
+  .textContent=
+   gameData.playerX
+    ?gameData.playerX.name
+    :"انتظار...";
+
+
+ document
+  .getElementById("nameO")
+  .textContent=
+   gameData.playerO
+    ?gameData.playerO.name
+    :"انتظار...";
+
+
+ document
+  .getElementById("mySymbol")
+  .textContent=
+   "رمزك: "+
+   (myPlayer==="X"?"❌":"⭕");
+
+
+ const board=
+  Array.isArray(gameData.board)
+   ?gameData.board
+   :[
+     "","","",
+     "","","",
+     "","",""
+    ];
+
+
+ cells.forEach(function(cell,index){
+
+  const value=board[index]||"";
+
+
+  cell.textContent=
+   value==="X"
+    ?"×"
+    :value==="O"
+     ?"○"
+     :"";
+
+
+  cell.classList.remove(
+   "x",
+   "o",
+   "win"
+  );
+
+
+  if(value==="X")
+   cell.classList.add("x");
+
+
+  if(value==="O")
+   cell.classList.add("o");
+
+ });
+
+
+ document
+  .getElementById("turnInfo")
+  .textContent=
+   "الدور: "+
+   (
+    gameData.turn==="X"
+     ?"❌"
+     :"⭕"
+   );
+
+
+ document
+  .getElementById("playerX")
+  .classList.toggle(
+   "active",
+   gameData.turn==="X"
+  );
+
+
+ document
+  .getElementById("playerO")
+  .classList.toggle(
+   "active",
+   gameData.turn==="O"
+  );
+
+
+ const message=
+  document.getElementById("message");
+
+
+ if(!gameData.playerO){
+
+  message.textContent=
+   "⏳ بانتظار اللاعب الثاني...";
+
+  disableCells();
+
+  return;
+
+ }
+
+
+ if(
+  gameData.winner==="X" ||
+  gameData.winner==="O"
+ ){
+
+  const winner=
+   gameData.winner==="X"
+    ?gameData.playerX.name
+    :gameData.playerO.name;
+
+
+  message.textContent=
+   "🏆 الفائز: "+winner;
+
+
+  highlightWinning(
+   getWinningCells(board)
+  );
+
+
+  disableCells();
+
+  return;
+
+ }
+
+
+ if(gameData.winner==="draw"){
+
+  message.textContent=
+   "🤝 تعادل!";
+
+
+  highlightWinning([]);
+
+  disableCells();
+
+  return;
+
+ }
+
+
+ highlightWinning([]);
+
+
+ if(gameData.turn===myPlayer){
+
+  message.textContent=
+   "🎯 دورك الآن";
+
+
+  enableCorrectCells();
+
+ }else{
+
+  message.textContent=
+   "⏳ انتظر دور الخصم...";
+
+
+  disableCells();
+
+ }
+
+}
+
+
+
+function enableCorrectCells(){
+
+ cells.forEach(
+  function(cell,index){
+
+   cell.disabled=
+    Boolean(
+     gameData.board &&
+     gameData.board[index]
+    );
+
+  }
+ );
+
+}
+
+
+
+function disableCells(){
+
+ cells.forEach(
+  function(cell){
+
+   cell.disabled=true;
+
+  }
+ );
+
+}
+
+
+
+/* =========================
+   PLAY
+========================= */
+
+window.play=async function(index){
+
+ if(
+  !gameData ||
+  !gameData.playerO ||
+  gameData.winner ||
+  gameData.turn!==myPlayer ||
+  gameData.board[index]
+ )return;
+
+
+ try{
+
+  await db
+   .ref("rooms/"+roomId)
+   .transaction(
+    function(current){
+
+     if(!current)return current;
+
+     if(
+      !current.playerX ||
+      !current.playerO
+     )return;
+
+     if(current.winner)return;
+
+     if(current.turn!==myPlayer)return;
+
+     if(current.board[index])return;
+
+
+     const board=
+      Array.isArray(current.board)
+       ?[...current.board]
+       :[
+        "","","",
+        "","","",
+        "","",""
+       ];
+
+
+     board[index]=myPlayer;
+
+
+     const winner=
+      checkWinner(board);
+
+
+     let gameWinner="";
+
+
+     if(winner){
+
+      gameWinner=winner;
+
+     }else if(
+      board.every(
+       v=>Boolean(v)
+      )
+     ){
+
+      gameWinner="draw";
+
+     }
+
+
+     current.board=board;
+
+     current.turn=
+      myPlayer==="X"
+       ?"O"
+       :"X";
+
+     current.winner=gameWinner;
+
+     current.status=
+      gameWinner
+       ?"finished"
+       :"playing";
+
+
+     return current;
+
+    }
+   );
+
+
+ }catch(error){
+
+  console.error(error);
+
+ }
+
+};
+
+
+
+function checkWinner(board){
+
+ const lines=[
+
+  [0,1,2],
+
+  [3,4,5],
+
+  [0,3,6],
+
+  [1,4,7],
+
+  [2,5,8],
+
+  [0,4,8],
+
+  [2,4,6]
+
+ ];
+
+
+ for(const line of lines){
+
+  const[a,b,c]=line;
+
+
+  if(
+   board[a] &&
+   board[a]===board[b] &&
+   board[a]===board[c]
+  ){
+
+   return board[a];
+
+  }
+
+ }
+
+
+ return "";
+
+}
+
+
+
+function getWinningCells(board){
+
+ const lines=[
+
+  [0,1,2],
+
+  [3,4,5],
+
+  [0,3,6],
+
+  [1,4,7],
+
+  [2,5,8],
+
+  [0,4,8],
+
+  [2,4,6]
+
+ ];
+
+
+ for(const line of lines){
+
+  const[a,b,c]=line;
+
+
+  if(
+   board[a] &&
+   board[a]===board[b] &&
+   board[a]===board[c]
+  ){
+
+   return line;
+
+  }
+
+ }
+
+
+ return [];
+
+}
+
+
+
+function highlightWinning(list){
+
+ cells.forEach(
+  function(cell,index){
+
+   if(list.includes(index))
+    cell.classList.add("win");
+
+  }
+ );
+
+}
+
+
+
+/* =========================
+   NEW GAME
+========================= */
+
+window.newGame=async function(){
+
+ if(
+  !roomId ||
+  !gameData ||
+  !gameData.playerO
+ )return;
+
+
+ try{
+
+  await db
+   .ref("rooms/"+roomId)
+   .update({
+
+    board:[
+     "","","",
+     "","","",
+     "","",""
+    ],
+
+    turn:"X",
+
+    winner:"",
+
+    status:"playing"
+
+   });
+
+
+ }catch(error){
+
+  console.error(error);
+
+ }
+
+};
+
+
+
+/* =========================
+   COPY ROOM
+========================= */
+
+window.copyRoomCode=async function(){
+
+ if(!roomId)return;
+
+
+ try{
+
+  await navigator.clipboard.writeText(roomId);
+
+  alert("✅ تم نسخ كود الغرفة");
+
+ }catch(error){
+
+  prompt(
+   "انسخ كود الغرفة:",
+   roomId
+  );
+
+ }
+
+};
+
+
+
+/* =========================
+   CAMERA HELPERS
+========================= */
+
+function cameraRef(){
+
+ return db.ref(
+  "rooms/"+roomId+"/camera"
+ );
+
+}
+
+
+
+function setCameraStatus(text){
+
+ const element=
+  document.getElementById(
+   "cameraStatus"
+  );
+
+ if(element)
+  element.textContent=text;
+
+}
+
+
+
+/* =========================
+   TOGGLE CAMERA
+========================= */
+
+window.toggleCamera=async function(){
+
+ if(!roomId)return;
+
+
+ if(!cameraEnabled){
+
+  await startCamera();
+
+ }else{
+
+  muteCamera();
+
+ }
+
+};
+
+
+
+/* =========================
+   START CAMERA
+========================= */
+
+async function startCamera(){
+
+ try{
+
+  if(!window.isSecureContext){
+
+   setCameraStatus(
+    "❌ الكاميرا تحتاج HTTPS"
+   );
+
+   return;
+
+  }
+
+
+  if(
+   !navigator.mediaDevices ||
+   !navigator.mediaDevices.getUserMedia
+  ){
+
+   setCameraStatus(
+    "❌ المتصفح لا يدعم الكاميرا"
+   );
+
+   return;
+
+  }
+
+
+  if(localStream){
+
+   localStream
+    .getAudioTracks()
+    .forEach(
+     function(track){
+
+      track.enabled=true;
+
+     }
+    );
+
+
+   localStream
+    .getVideoTracks()
+    .forEach(
+     function(track){
+
+      track.enabled=true;
+
+     }
+    );
+
+  }else{
+
+   localStream=
+    await navigator.mediaDevices.getUserMedia({
+
+     audio:{
+      echoCancellation:true,
+      noiseSuppression:true,
+      autoGainControl:true
+     },
+
+     video:{
+      facingMode:"user",
+      width:{
+       ideal:640
+      },
+      height:{
+       ideal:480
+      }
+     }
+
+    });
+
+  }
+
+
+  const localVideo=
+   document.getElementById(
+    "localVideo"
+   );
+
+
+  localVideo.srcObject=
+   localStream;
+
+
+  try{
+
+   await localVideo.play();
+
+  }catch(e){}
+
+
+  cameraEnabled=true;
+
+  updateCameraButton();
+
+
+  if(
+   !gameData ||
+   !gameData.playerX ||
+   !gameData.playerO
+  ){
+
+   setCameraStatus(
+    "📹 الكاميرا والصوت يعملان — بانتظار صديقك"
+   );
+
+   return;
+
+  }
+
+
+  startCameraListeners();
+
+
+  if(myPlayer==="X"){
+
+   await createOffer();
+
+  }else{
+
+   await checkExistingOffer();
+
+  }
+
+
+ }catch(error){
+
+  console.error(
+   "CAMERA ERROR:",
+   error
+  );
+
+
+  cameraEnabled=false;
+
+  updateCameraButton();
+
+
+  if(
+   error.name==="NotAllowedError" ||
+   error.name==="PermissionDeniedError"
+  ){
+
+   setCameraStatus(
+    "❌ تم رفض الكاميرا أو المايك. اسمح بالصلاحية"
+   );
+
+  }else if(
+   error.name==="NotFoundError"
+  ){
+
+   setCameraStatus(
+    "❌ لم يتم العثور على الكاميرا أو المايك"
+   );
+
+  }else if(
+   error.name==="NotReadableError"
+  ){
+
+   setCameraStatus(
+    "❌ الكاميرا مستخدمة من تطبيق آخر"
+   );
+
+  }else{
+
+   setCameraStatus(
+    "❌ "+error.name
+   );
+
+  }
+
+ }
+
+}
+
+
+
+/* =========================
+   CREATE PEER
+========================= */
+
+function createPeerConnection(){
+
+ if(peerConnection)
+  return peerConnection;
+
+
+ peerConnection=
+  new RTCPeerConnection(
+   rtcConfig
+  );
+
+
+ if(localStream){
+
+  localStream
+   .getTracks()
+   .forEach(
+    function(track){
+
+     peerConnection.addTrack(
+      track,
+      localStream
+     );
+
+    }
+   );
+
+ }
+
+
+ peerConnection.ontrack=
+  async function(event){
+
+   const remoteVideo=
+    document.getElementById(
+     "remoteVideo"
+    );
+
+
+   if(
+    event.streams &&
+    event.streams[0]
+   ){
+
+    remoteVideo.srcObject=
+     event.streams[0];
+
+
+    try{
+
+     await remoteVideo.play();
+
+    }catch(error){
+
+     console.log(
+      "Remote video play:",
+      error
+     );
+
+    }
+
+   }
+
+
+   setCameraStatus(
+    "🔊📹 الكاميرا والصوت متصلان"
+   );
+
+  };
+
+
+
+ peerConnection.onicecandidate=
+  function(event){
+
+   if(!event.candidate)
+    return;
+
+
+   const path=
+    myPlayer==="X"
+     ?"callerCandidates"
+     :"calleeCandidates";
+
+
+   cameraRef()
+    .child(path)
+    .push(
+     event.candidate.toJSON()
+    );
+
+  };
+
+
+
+ peerConnection.onconnectionstatechange=
+  function(){
+
+   if(!peerConnection)
+    return;
+
+
+   const state=
+    peerConnection.connectionState;
+
+
+   if(state==="connected"){
+
+    setCameraStatus(
+     "🔊📹 متصل بالكاميرا والصوت"
+    );
+
+   }
+
+
+   if(state==="connecting"){
+
+    setCameraStatus(
+     "⏳ جاري الاتصال بالكاميرا..."
+    );
+
+   }
+
+
+   if(state==="disconnected"){
+
+    setCameraStatus(
+     "⚠️ انقطع الاتصال مؤقتاً"
+    );
+
+   }
+
+
+   if(state==="failed"){
+
+    setCameraStatus(
+     "❌ فشل اتصال الكاميرا"
+    );
+
+   }
+
+  };
+
+
+ return peerConnection;
+
+}
+
+
+
+/* =========================
+   LISTENERS
+========================= */
+
+function startCameraListeners(){
+
+ if(cameraListenersStarted)
+  return;
+
+
+ cameraListenersStarted=true;
+
+
+ const ref=cameraRef();
+
+
+ /* O */
+
+ if(myPlayer==="O"){
+
+  ref
+   .child("offer")
+   .on(
+    "value",
+    async function(snapshot){
+
+     if(!snapshot.exists())
+      return;
+
+
+     if(!cameraEnabled){
+
+      setCameraStatus(
+       "📹 صديقك جاهز — شغّل الكاميرا"
+      );
+
+      return;
+
+     }
+
+
+     await handleOffer(
+      snapshot.val()
+     );
+
+    }
+   );
+
+
+  ref
+   .child("callerCandidates")
+   .on(
+    "child_added",
+    async function(snapshot){
+
+     await receiveCandidate(
+      snapshot.val()
+     );
+
+    }
+   );
+
+ }
+
+
+ /* X */
+
+ if(myPlayer==="X"){
+
+  ref
+   .child("answer")
+   .on(
+    "value",
+    async function(snapshot){
+
+     if(
+      !snapshot.exists() ||
+      !peerConnection ||
+      answerCreated
+     )return;
+
+
+     try{
+
+      answerCreated=true;
+
+
+      await peerConnection
+       .setRemoteDescription(
+        new RTCSessionDescription(
+         snapshot.val()
+        )
+       );
+
+
+      await addPendingCandidates();
+
+
+      setCameraStatus(
+       "🔊📹 تم الاتصال بالكاميرا والصوت"
+      );
+
+
+     }catch(error){
+
+      answerCreated=false;
+
+      console.error(
+       "ANSWER ERROR:",
+       error
+      );
+
+     }
+
+    }
+   );
+
+
+  ref
+   .child("calleeCandidates")
+   .on(
+    "child_added",
+    async function(snapshot){
+
+     await receiveCandidate(
+      snapshot.val()
+     );
+
+    }
+   );
+
+ }
+
+}
+
+
+
+/* =========================
+   CREATE OFFER
+========================= */
+
+async function createOffer(){
+
+ if(
+  !cameraEnabled ||
+  myPlayer!=="X" ||
+  !gameData ||
+  !gameData.playerO
+ )return;
+
+
+ createPeerConnection();
+
+
+ if(offerCreated)
+  return;
+
+
+ try{
+
+  const offer=
+   await peerConnection.createOffer();
+
+
+  await peerConnection
+   .setLocalDescription(offer);
+
+
+  await cameraRef()
+   .child("offer")
+   .set({
+
+    type:offer.type,
+
+    sdp:offer.sdp
+
+   });
+
+
+  offerCreated=true;
+
+
+  setCameraStatus(
+   "⏳ بانتظار اتصال صديقك بالكاميرا..."
+  );
+
+
+ }catch(error){
+
+  console.error(
+   "OFFER ERROR:",
+   error
+  );
+
+
+  setCameraStatus(
+   "❌ تعذر إنشاء اتصال الكاميرا"
+  );
+
+ }
+
+}
+
+
+
+/* =========================
+   CHECK OFFER
+========================= */
+
+async function checkExistingOffer(){
+
+ if(
+  !cameraEnabled ||
+  myPlayer!=="O"
+ )
+  return;
+
+
+ createPeerConnection();
+
+
+ try{
+
+  const snapshot=
+   await cameraRef()
+    .child("offer")
+    .once("value");
+
+
+  if(snapshot.exists()){
+
+   await handleOffer(
+    snapshot.val()
+   );
+
+  }else{
+
+   setCameraStatus(
+    "📹 الكاميرا تعمل — بانتظار صديقك"
+   );
+
+  }
+
+ }catch(error){
+
+  console.error(error);
+
+ }
+
+}
+
+
+
+/* =========================
+   HANDLE OFFER
+========================= */
+
+async function handleOffer(offer){
+
+ if(
+  !cameraEnabled ||
+  myPlayer!=="O"
+ )
+  return;
+
+
+ createPeerConnection();
+
+
+ if(
+  peerConnection.currentRemoteDescription
+ )
+  return;
+
+
+ try{
+
+  await peerConnection
+   .setRemoteDescription(
+    new RTCSessionDescription(
+     offer
+    )
+   );
+
+
+  await addPendingCandidates();
+
+
+  const answer=
+   await peerConnection.createAnswer();
+
+
+  await peerConnection
+   .setLocalDescription(answer);
+
+
+  await cameraRef()
+   .child("answer")
+   .set({
+
+    type:answer.type,
+
+    sdp:answer.sdp
+
+   });
+
+
+  setCameraStatus(
+   "⏳ جاري الاتصال بالكاميرا والصوت..."
+  );
+
+
+ }catch(error){
+
+  console.error(
+   "HANDLE OFFER ERROR:",
+   error
+  );
+
+
+  setCameraStatus(
+   "❌ تعذر الاتصال بالكاميرا"
+  );
+
+ }
+
+}
+
+
+
+/* =========================
+   ICE
+========================= */
+
+async function receiveCandidate(candidate){
+
+ if(!candidate)
+  return;
+
+
+ if(
+  !peerConnection ||
+  !peerConnection.remoteDescription
+ ){
+
+  remoteCandidates.push(
+   candidate
+  );
+
+  return;
+
+ }
+
+
+ try{
+
+  await peerConnection
+   .addIceCandidate(
+    new RTCIceCandidate(
+     candidate
+    )
+   );
+
+ }catch(error){
+
+  console.error(
+   "ICE ERROR:",
+   error
+  );
+
+ }
+
+}
+
+
+
+async function addPendingCandidates(){
+
+ if(
+  !peerConnection ||
+  !peerConnection.remoteDescription
+ )
+  return;
+
+
+ const list=[
+  ...remoteCandidates
+ ];
+
+
+ remoteCandidates=[];
+
+
+ for(
+  const candidate of list
+ ){
+
+  try{
+
+   await peerConnection
+    .addIceCandidate(
+     new RTCIceCandidate(
+      candidate
+     )
+    );
+
+  }catch(error){
+
+   console.error(
+    "PENDING ICE ERROR:",
+    error
+   );
+
+  }
+
+ }
+
+}
+
+
+
+/* =========================
+   MUTE CAMERA
+========================= */
+
+function muteCamera(){
+
+ if(localStream){
+
+  localStream
+   .getAudioTracks()
+   .forEach(
+    function(track){
+
+     track.enabled=false;
+
+    }
+   );
+
+
+  localStream
+   .getVideoTracks()
+   .forEach(
+    function(track){
+
+     track.enabled=false;
+
+    }
+   );
+
+ }
+
+
+ cameraEnabled=false;
+
+ updateCameraButton();
+
+
+ setCameraStatus(
+  "🔇 الكاميرا والمايك مكتومان"
+ );
+
+}
+
+
+
+/* =========================
+   BUTTON
+========================= */
+
+function updateCameraButton(){
+
+ const button=
+  document.getElementById(
+   "cameraBtn"
+  );
+
+
+ if(!button)
+  return;
+
+
+ if(cameraEnabled){
+
+  button.textContent=
+   "🔇 إيقاف الكاميرا والمايك";
+
+  button.classList.remove("off");
+
+ }else{
+
+  button.textContent=
+   "📹 تشغيل الكاميرا";
+
+  button.classList.add("off");
+
+ }
+
+}
+
+
+
+/* =========================
+   STOP CAMERA
+========================= */
+
+function stopCamera(){
+
+ try{
+
+  if(peerConnection){
+
+   peerConnection.ontrack=null;
+
+   peerConnection.onicecandidate=null;
+
+   peerConnection.close();
+
+  }
+
+ }catch(error){
+
+  console.error(error);
+
+ }
+
+
+ peerConnection=null;
+
+
+ if(localStream){
+
+  localStream
+   .getTracks()
+   .forEach(
+    function(track){
+
+     track.stop();
+
+    }
+   );
+
+ }
+
+
+ localStream=null;
+
+ cameraEnabled=false;
+
+ remoteCandidates=[];
+
+ cameraListenersStarted=false;
+
+ offerCreated=false;
+
+ answerCreated=false;
+
+
+ const localVideo=
+  document.getElementById(
+   "localVideo"
+  );
+
+
+ const remoteVideo=
+  document.getElementById(
+   "remoteVideo"
+  );
+
+
+ if(localVideo)
+  localVideo.srcObject=null;
+
+
+ if(remoteVideo)
+  remoteVideo.srcObject=null;
+
+
+ updateCameraButton();
+
+}
+
+
+
+/* =========================
+   REMOVE CAMERA DATA
+========================= */
+
+async function removeCameraData(){
+
+ if(!roomId)
+  return;
+
+
+ try{
+
+  await cameraRef().remove();
+
+ }catch(error){
+
+  console.error(error);
+
+ }
+
+}
+
+
+
+/* =========================
+   LEAVE
+========================= */
+
+window.leaveRoom=async function(){
+
+ if(!roomId){
+
+  location.reload();
+
+  return;
+
+ }
+
+
+ stopCamera();
+
+
+ try{
+
+  const roomRef=
+   db.ref("rooms/"+roomId);
+
+
+  if(myPlayer==="X"){
+
+   await roomRef.remove();
+
+  }else{
+
+   await roomRef.update({
+
+    playerO:null,
+
+    status:"waiting",
+
+    winner:""
+
+   });
+
+
+   await removeCameraData();
+
+  }
+
+
+ }catch(error){
+
+  console.error(error);
+
+ }
+
+
+ location.reload();
+
+};
+
+
+
+window.addEventListener(
+ "beforeunload",
+ function(){
+
+  stopCamera();
+
+ }
+);
+
+
+console.log(
+ "🔥 XO Online + Camera + Audio جاهز"
+);
+
+</script>
+
+</body>
+</html>
