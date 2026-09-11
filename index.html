@@ -3,331 +3,303 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-
 <title>XO Online</title>
 
 <style>
 *{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
+ box-sizing:border-box;
+ -webkit-tap-highlight-color:transparent
 }
 
 html,body{
-  margin:0;
-  width:100%;
-  min-height:100%;
+ margin:0;
+ width:100%;
+ min-height:100%
 }
 
 body{
-  min-height:100vh;
-  font-family:Arial,Tahoma,sans-serif;
-  background:
-    radial-gradient(circle at top,#18234b 0,#080b18 55%,#05060d 100%);
-  color:#fff;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:12px;
+ min-height:100vh;
+ font-family:Arial,Tahoma,sans-serif;
+ background:radial-gradient(circle at top,#18234b 0,#080b18 55%,#05060d 100%);
+ color:#fff;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ padding:14px
 }
 
 button,input{
-  font-family:inherit;
+ font-family:inherit
 }
 
 button{
-  user-select:none;
-  -webkit-user-select:none;
+ user-select:none;
+ -webkit-user-select:none;
+ cursor:pointer
 }
 
 .app{
-  width:100%;
-  max-width:450px;
+ width:100%;
+ max-width:430px
 }
 
 .logo{
-  text-align:center;
-  font-size:52px;
-  font-weight:900;
-  margin-bottom:2px;
-  background:linear-gradient(90deg,#7c6cff,#00e5ff);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
+ text-align:center;
+ font-size:52px;
+ font-weight:900;
+ margin-bottom:2px;
+ background:linear-gradient(90deg,#7c6cff,#00e5ff);
+ -webkit-background-clip:text;
+ background-clip:text;
+ color:transparent
 }
 
 .subtitle{
-  text-align:center;
-  color:#9da9c9;
-  margin-bottom:16px;
-  font-size:15px;
+ text-align:center;
+ color:#9da9c9;
+ margin-bottom:18px;
+ font-size:15px
 }
 
 .card{
-  width:100%;
-  background:rgba(19,26,50,.97);
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:25px;
-  padding:16px;
-  box-shadow:0 20px 55px rgba(0,0,0,.45);
+ width:100%;
+ background:rgba(19,26,50,.96);
+ border:1px solid rgba(255,255,255,.09);
+ border-radius:25px;
+ padding:18px;
+ box-shadow:0 20px 55px rgba(0,0,0,.45)
 }
 
 input{
-  width:100%;
-  height:52px;
-  border:1px solid rgba(255,255,255,.08);
-  outline:none;
-  border-radius:15px;
-  background:#090f22;
-  color:#fff;
-  font-size:16px;
-  padding:0 15px;
-  text-align:center;
-  margin-bottom:10px;
+ width:100%;
+ height:52px;
+ border:1px solid rgba(255,255,255,.08);
+ outline:none;
+ border-radius:15px;
+ background:#090f22;
+ color:#fff;
+ font-size:16px;
+ padding:0 15px;
+ text-align:center;
+ margin-bottom:10px
 }
 
 input:focus{
-  border-color:#6c63ff;
+ border-color:#6c63ff
 }
 
 button{
-  width:100%;
-  min-height:50px;
-  border:0;
-  border-radius:15px;
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
-  margin-top:8px;
-  background:linear-gradient(135deg,#665cff,#00bcd4);
-  transition:.15s;
+ width:100%;
+ min-height:50px;
+ border:0;
+ border-radius:15px;
+ color:white;
+ font-size:16px;
+ font-weight:bold;
+ margin-top:8px;
+ background:linear-gradient(135deg,#665cff,#00bcd4);
+ transition:.15s
 }
 
 button:active{
-  transform:scale(.97);
+ transform:scale(.97)
+}
+
+button:disabled{
+ cursor:not-allowed;
+ opacity:.65
 }
 
 .secondary{
-  background:#252e4d;
+ background:#252e4d
 }
 
 .danger{
-  background:#a52d4c;
+ background:#a52d4c
 }
 
 .copy{
-  background:#222c4b;
-  margin-top:10px;
+ background:#222c4b;
+ margin-top:10px
 }
 
 .hidden{
-  display:none!important;
+ display:none!important
 }
 
 .status{
-  text-align:center;
-  min-height:24px;
-  margin:14px 0 0;
-  color:#aeb9d5;
-  font-size:14px;
-}
-
-.small{
-  text-align:center;
-  color:#697594;
-  font-size:12px;
-  margin-top:14px;
-}
-
-#joinBox{
-  margin-top:8px;
+ text-align:center;
+ min-height:24px;
+ margin:14px 0 0;
+ color:#aeb9d5;
+ font-size:14px
 }
 
 .room{
-  text-align:center;
-  background:#090f22;
-  border-radius:17px;
-  padding:12px;
-  margin-bottom:12px;
+ text-align:center;
+ background:#090f22;
+ border-radius:17px;
+ padding:13px;
+ margin-bottom:13px
 }
 
 .room-title{
-  color:#9da9c9;
-  font-size:13px;
-  margin-bottom:5px;
+ color:#9da9c9;
+ font-size:13px;
+ margin-bottom:5px
 }
 
 .room-code{
-  color:#00e5ff;
-  font-size:29px;
-  font-weight:900;
-  letter-spacing:6px;
+ color:#00e5ff;
+ font-size:29px;
+ font-weight:900;
+ letter-spacing:6px
 }
 
 .players{
-  display:flex;
-  gap:8px;
+ display:flex;
+ gap:9px
 }
 
 .player{
-  flex:1;
-  min-width:0;
-  padding:11px 7px;
-  background:#090f22;
-  border-radius:16px;
-  text-align:center;
-  border:2px solid transparent;
+ flex:1;
+ min-width:0;
+ padding:12px 7px;
+ background:#090f22;
+ border-radius:16px;
+ text-align:center;
+ border:2px solid transparent
 }
 
 .player.active{
-  border-color:#00e5ff;
-  box-shadow:0 0 15px rgba(0,229,255,.15);
+ border-color:#00e5ff;
+ box-shadow:0 0 15px rgba(0,229,255,.15)
 }
 
 .player-icon{
-  font-size:24px;
+ font-size:25px
 }
 
 .player-name{
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  margin-top:4px;
-  font-weight:bold;
+ overflow:hidden;
+ text-overflow:ellipsis;
+ white-space:nowrap;
+ margin-top:4px;
+ font-weight:bold
 }
 
 .message{
-  text-align:center;
-  min-height:27px;
-  margin:12px 0 7px;
-  font-size:17px;
-  font-weight:bold;
+ text-align:center;
+ min-height:27px;
+ margin:13px 0 7px;
+ font-size:17px;
+ font-weight:bold
 }
 
 .board{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  margin:8px 0 12px;
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:9px;
+ margin:8px 0 13px
 }
 
 .cell{
-  width:100%;
-  aspect-ratio:1/1;
-  min-height:75px;
-  margin:0;
-  padding:0;
-  border-radius:18px;
-  background:#080e20;
-  border:1px solid rgba(255,255,255,.06);
-  font-size:48px;
-  font-weight:900;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:inset 0 0 15px rgba(0,0,0,.2);
+ width:100%;
+ aspect-ratio:1/1;
+ min-height:80px;
+ margin:0;
+ padding:0;
+ border-radius:18px;
+ background:#080e20;
+ border:1px solid rgba(255,255,255,.06);
+ font-size:48px;
+ font-weight:900;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ box-shadow:inset 0 0 15px rgba(0,0,0,.2)
 }
 
 .cell.x{
-  color:#766bff;
+ color:#766bff
 }
 
 .cell.o{
-  color:#00e5ff;
+ color:#00e5ff
 }
 
 .cell.win{
-  background:linear-gradient(135deg,#274c5b,#303464);
-  border-color:#00e5ff;
+ background:linear-gradient(135deg,#274c5b,#303464);
+ border-color:#00e5ff
 }
 
 .cell:disabled{
-  opacity:1;
+ opacity:1
 }
 
 .info{
-  display:flex;
-  justify-content:space-between;
-  color:#9da9c9;
-  font-size:13px;
-  margin-bottom:5px;
+ display:flex;
+ justify-content:space-between;
+ color:#9da9c9;
+ font-size:13px;
+ margin-bottom:4px
 }
 
-/* CAMERA */
-
-.camera-title{
-  text-align:center;
-  font-size:15px;
-  font-weight:bold;
-  margin-bottom:9px;
+.voice-box{
+ margin-top:14px;
+ padding:13px;
+ background:#090f22;
+ border-radius:18px;
+ border:1px solid rgba(255,255,255,.07);
+ text-align:center
 }
 
-.cameras{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
+.voice-title{
+ font-size:15px;
+ font-weight:bold;
+ margin-bottom:7px
 }
 
-.video-box{
-  position:relative;
-  background:#050812;
-  border-radius:17px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.08);
-  aspect-ratio:4/3;
+.voice-status{
+ min-height:20px;
+ font-size:12px;
+ color:#9da9c9;
+ margin-top:7px
 }
 
-.video-box video{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  background:#050812;
+.voice-button{
+ margin-top:5px;
+ background:linear-gradient(135deg,#5d50ff,#00aeca)
 }
 
-.video-label{
-  position:absolute;
-  right:7px;
-  bottom:7px;
-  padding:5px 8px;
-  border-radius:10px;
-  background:rgba(0,0,0,.6);
-  font-size:11px;
-  z-index:2;
+.voice-button.muted{
+ background:#252e4d
 }
 
-.camera-status{
-  text-align:center;
-  min-height:20px;
-  color:#9da9c9;
-  font-size:12px;
-  margin-top:8px;
+.small{
+ text-align:center;
+ color:#697594;
+ font-size:12px;
+ margin-top:14px
 }
 
-.camera-button{
-  margin-top:7px;
-  background:linear-gradient(135deg,#5d50ff,#00aeca);
-}
-
-.camera-button.off{
-  background:#252e4d;
+#joinBox{
+ margin-top:8px
 }
 
 @media(max-width:360px){
+ .card{
+  padding:14px
+ }
 
-  .card{
-    padding:13px;
-  }
+ .cell{
+  min-height:70px;
+  font-size:42px
+ }
 
-  .cell{
-    min-height:65px;
-    font-size:42px;
-  }
-
-  .logo{
-    font-size:45px;
-  }
-
+ .logo{
+  font-size:45px
+ }
 }
 </style>
 </head>
@@ -339,20 +311,18 @@ button:active{
 <div class="logo">XO</div>
 
 <div class="subtitle">
-لعبة XO أونلاين 📹🎮
+لعبة XO أونلاين 🎮
 </div>
-
-<!-- HOME -->
 
 <div id="home" class="card">
 
 <input
-  id="nameInput"
-  maxlength="18"
-  autocomplete="off"
-  placeholder="اكتب اسمك">
+ id="nameInput"
+ maxlength="18"
+ autocomplete="off"
+ placeholder="اكتب اسمك">
 
-<button onclick="createRoom()">
+<button id="createBtn" onclick="createRoom()">
 🎮 إنشاء غرفة
 </button>
 
@@ -363,10 +333,10 @@ button:active{
 <div id="joinBox" class="hidden">
 
 <input
-  id="roomInput"
-  maxlength="6"
-  autocomplete="off"
-  placeholder="أدخل كود الغرفة">
+ id="roomInput"
+ maxlength="6"
+ autocomplete="off"
+ placeholder="أدخل كود الغرفة">
 
 <button onclick="joinRoom()">
 🚀 دخول الغرفة
@@ -382,8 +352,6 @@ button:active{
 
 </div>
 
-
-<!-- GAME -->
 
 <div id="game" class="card hidden">
 
@@ -418,6 +386,7 @@ button:active{
 
 </div>
 
+
 <div id="playerO" class="player">
 
 <div class="player-icon">
@@ -437,63 +406,6 @@ button:active{
 بانتظار اللاعب الثاني...
 </div>
 
-
-<!-- CAMERA -->
-
-<div class="camera-title">
-📹 الكاميرا والصوت
-</div>
-
-<div class="cameras">
-
-<div class="video-box">
-
-<video
-  id="localVideo"
-  autoplay
-  muted
-  playsinline>
-</video>
-
-<div class="video-label">
-أنت
-</div>
-
-</div>
-
-
-<div class="video-box">
-
-<video
-  id="remoteVideo"
-  autoplay
-  playsinline>
-</video>
-
-<div class="video-label">
-صديقك
-</div>
-
-</div>
-
-</div>
-
-
-<div id="cameraStatus" class="camera-status">
-اضغط تشغيل الكاميرا
-</div>
-
-<button
-  id="cameraBtn"
-  class="camera-button"
-  onclick="toggleCamera()">
-
-📹 تشغيل الكاميرا
-
-</button>
-
-
-<!-- BOARD -->
 
 <div class="board">
 
@@ -525,6 +437,32 @@ button:active{
 </div>
 
 
+<div class="voice-box">
+
+<div class="voice-title">
+🎤 المحادثة الصوتية
+</div>
+
+<button
+ id="voiceBtn"
+ class="voice-button muted"
+ onclick="toggleVoice()">
+🎤 تشغيل المايك
+</button>
+
+<div id="voiceStatus" class="voice-status">
+تقدر تشغل المايك الآن
+</div>
+
+<audio
+ id="remoteAudio"
+ autoplay
+ playsinline>
+</audio>
+
+</div>
+
+
 <button onclick="newGame()">
 🔄 مباراة جديدة
 </button>
@@ -538,105 +476,51 @@ button:active{
 </div>
 
 
-<!-- FIREBASE -->
-
 <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-app-compat.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/12.1.0/firebase-database-compat.js"></script>
 
 
 <script>
 
-/* =========================
-   FIREBASE
-========================= */
-
 const firebaseConfig = {
-
  apiKey:"AIzaSyDY2odtqfikOFiImAFUPAivKxex053rWGw",
-
  authDomain:"xo-ga-13a1e.firebaseapp.com",
-
  databaseURL:"https://xo-ga-13a1e-default-rtdb.firebaseio.com",
-
  projectId:"xo-ga-13a1e",
-
  storageBucket:"xo-ga-13a1e.firebasestorage.app",
-
  messagingSenderId:"708857601181",
-
  appId:"1:708857601181:web:8b0b3ba2920df3a7c64874",
-
  measurementId:"G-S4SBWVYJEC"
-
 };
-
 
 firebase.initializeApp(firebaseConfig);
 
 const db=firebase.database();
 
-
-/* =========================
-   GAME VARIABLES
-========================= */
-
 let roomId=null;
-
 let myPlayer=null;
-
 let playerName="";
-
 let gameData=null;
-
 let roomListener=null;
 
 const cells=document.querySelectorAll(".cell");
 
-
-/* =========================
-   WEBRTC VARIABLES
-========================= */
-
 let peerConnection=null;
-
 let localStream=null;
-
-let cameraEnabled=false;
-
+let voiceEnabled=false;
 let remoteCandidates=[];
-
 let voiceListenersStarted=false;
-
 let offerCreated=false;
-
 let answerCreated=false;
 
-
-/* =========================
-   WEBRTC SERVER
-========================= */
-
 const rtcConfig={
-
  iceServers:[
-
   {
    urls:"stun:stun.l.google.com:19302"
-  },
-
-  {
-   urls:"stun:stun1.l.google.com:19302"
   }
-
  ]
-
 };
 
-
-/* =========================
-   RANDOM ROOM
-========================= */
 
 function randomRoom(){
 
@@ -653,13 +537,8 @@ function randomRoom(){
  }
 
  return result;
-
 }
 
-
-/* =========================
-   NAME
-========================= */
 
 function getName(){
 
@@ -674,11 +553,9 @@ function getName(){
   input.focus();
 
   return null;
-
  }
 
  return name;
-
 }
 
 
@@ -689,24 +566,20 @@ function showHomeStatus(text){
 }
 
 
-function showJoin(){
+window.showJoin=function(){
 
  document
- .getElementById("joinBox")
- .classList.remove("hidden");
+  .getElementById("joinBox")
+  .classList.remove("hidden");
 
  document
- .getElementById("roomInput")
- .focus();
+  .getElementById("roomInput")
+  .focus();
 
-}
+};
 
 
-/* =========================
-   CREATE ROOM
-========================= */
-
-async function createRoom(){
+window.createRoom=async function(){
 
  const name=getName();
 
@@ -716,10 +589,13 @@ async function createRoom(){
 
  showHomeStatus("⏳ جاري إنشاء الغرفة...");
 
+ const createButton=document.getElementById("createBtn");
+
+ createButton.disabled=true;
+
  try{
 
   let code=null;
-
   let roomRef=null;
 
   for(let i=0;i<10;i++){
@@ -739,21 +615,17 @@ async function createRoom(){
     roomRef=possibleRef;
 
     break;
-
    }
-
   }
 
   if(!code){
 
    throw new Error("تعذر إنشاء غرفة");
-
   }
 
   roomId=code;
 
   myPlayer="X";
-
 
   await roomRef.set({
 
@@ -778,45 +650,39 @@ async function createRoom(){
 
    createdAt:
     firebase.database.ServerValue.TIMESTAMP
-
   });
-
 
   enterGame();
 
   listenRoom();
 
-
  }catch(error){
 
-  console.error(error);
+  console.error("CREATE ROOM ERROR:",error);
 
   showHomeStatus(
    "❌ "+(error.code||error.message)
   );
 
+ }finally{
+
+  createButton.disabled=false;
  }
 
-}
+};
 
 
-/* =========================
-   JOIN ROOM
-========================= */
-
-async function joinRoom(){
+window.joinRoom=async function(){
 
  const name=getName();
 
  if(!name)return;
 
- const code=
-  document
-  .getElementById("roomInput")
-  .value
-  .trim()
-  .toUpperCase();
+ const input=
+  document.getElementById("roomInput");
 
+ const code=
+  input.value.trim().toUpperCase();
 
  if(code.length!==6){
 
@@ -825,14 +691,11 @@ async function joinRoom(){
   );
 
   return;
-
  }
-
 
  playerName=name;
 
  showHomeStatus("⏳ جاري الدخول...");
-
 
  try{
 
@@ -842,7 +705,6 @@ async function joinRoom(){
   const snapshot=
    await roomRef.once("value");
 
-
   if(!snapshot.exists()){
 
    showHomeStatus(
@@ -850,12 +712,9 @@ async function joinRoom(){
    );
 
    return;
-
   }
 
-
   const data=snapshot.val();
-
 
   if(data.playerO){
 
@@ -864,9 +723,7 @@ async function joinRoom(){
    );
 
    return;
-
   }
-
 
   await roomRef.update({
 
@@ -879,20 +736,17 @@ async function joinRoom(){
 
   });
 
-
   roomId=code;
 
   myPlayer="O";
-
 
   enterGame();
 
   listenRoom();
 
-
  }catch(error){
 
-  console.error(error);
+  console.error("JOIN ERROR:",error);
 
   showHomeStatus(
    "❌ "+(error.code||error.message)
@@ -900,40 +754,29 @@ async function joinRoom(){
 
  }
 
-}
+};
 
-
-/* =========================
-   ENTER GAME
-========================= */
 
 function enterGame(){
 
  document
- .getElementById("home")
- .classList.add("hidden");
-
-
- document
- .getElementById("game")
- .classList.remove("hidden");
-
+  .getElementById("home")
+  .classList.add("hidden");
 
  document
- .getElementById("roomCode")
- .textContent=roomId;
+  .getElementById("game")
+  .classList.remove("hidden");
 
+ document
+  .getElementById("roomCode")
+  .textContent=roomId;
 
- setCameraStatus(
-  "📹 اضغط تشغيل الكاميرا والصوت"
+ setVoiceStatus(
+  "🎤 اضغط تشغيل المايك حتى لو صديقك لم يدخل بعد"
  );
 
 }
 
-
-/* =========================
-   ROOM LISTENER
-========================= */
 
 function listenRoom(){
 
@@ -946,37 +789,33 @@ function listenRoom(){
  roomListener=
   db.ref("rooms/"+roomId);
 
-
  roomListener.on(
   "value",
   async function(snapshot){
 
    if(!snapshot.exists()){
 
-    stopCamera();
+    stopVoice();
 
     alert("تم حذف الغرفة");
 
     location.reload();
 
     return;
-
    }
-
 
    gameData=snapshot.val();
 
    render();
-
 
    if(
     gameData.playerX &&
     gameData.playerO
    ){
 
-    startCameraListeners();
+    startVoiceListeners();
 
-    if(cameraEnabled){
+    if(voiceEnabled){
 
      if(myPlayer==="X"){
 
@@ -998,108 +837,102 @@ function listenRoom(){
 }
 
 
-/* =========================
-   RENDER GAME
-========================= */
-
 function render(){
 
  if(!gameData)return;
 
+ document
+  .getElementById("nameX")
+  .textContent=
+   gameData.playerX
+    ?gameData.playerX.name
+    :"انتظار...";
 
  document
- .getElementById("nameX")
- .textContent=
- gameData.playerX
- ?gameData.playerX.name
- :"انتظار...";
-
-
- document
- .getElementById("nameO")
- .textContent=
- gameData.playerO
- ?gameData.playerO.name
- :"انتظار...";
+  .getElementById("nameO")
+  .textContent=
+   gameData.playerO
+    ?gameData.playerO.name
+    :"انتظار...";
 
 
  document
- .getElementById("mySymbol")
- .textContent=
- "رمزك: "+
- (
-  myPlayer==="X"
-  ?"❌"
-  :"⭕"
- );
+  .getElementById("mySymbol")
+  .textContent=
+   "رمزك: "+
+   (myPlayer==="X"?"❌":"⭕");
 
 
  const board=
   Array.isArray(gameData.board)
-  ?gameData.board
-  :[
-    "","","",
-    "","","",
-    "","",""
-   ];
+   ?gameData.board
+   :[
+     "","","",
+     "","","",
+     "","",""
+    ];
 
 
- cells.forEach(function(cell,index){
+ cells.forEach(
+  function(cell,index){
 
-  const value=
-   board[index]||"";
+   const value=
+    board[index]||"";
+
+   cell.textContent=
+    value==="X"
+     ?"×"
+     :value==="O"
+      ?"○"
+      :"";
+
+   cell.classList.remove(
+    "x",
+    "o",
+    "win"
+   );
+
+   if(value==="X"){
+
+    cell.classList.add("x");
+
+   }
+
+   if(value==="O"){
+
+    cell.classList.add("o");
+
+   }
+
+  }
+ );
 
 
-  cell.textContent=
-   value==="X"
-   ?"×"
-   :value==="O"
-   ?"○"
-   :"";
+ document
+  .getElementById("turnInfo")
+  .textContent=
+   "الدور: "+
+   (
+    gameData.turn==="X"
+     ?"❌"
+     :"⭕"
+   );
 
 
-  cell.classList.remove(
-   "x",
-   "o",
-   "win"
+ document
+  .getElementById("playerX")
+  .classList.toggle(
+   "active",
+   gameData.turn==="X"
   );
 
 
-  if(value==="X")
-   cell.classList.add("x");
-
-
-  if(value==="O")
-   cell.classList.add("o");
-
- });
-
-
  document
- .getElementById("turnInfo")
- .textContent=
- "الدور: "+
- (
-  gameData.turn==="X"
-  ?"❌"
-  :"⭕"
- );
-
-
- document
- .getElementById("playerX")
- .classList.toggle(
-  "active",
-  gameData.turn==="X"
- );
-
-
- document
- .getElementById("playerO")
- .classList.toggle(
-  "active",
-  gameData.turn==="O"
- );
+  .getElementById("playerO")
+  .classList.toggle(
+   "active",
+   gameData.turn==="O"
+  );
 
 
  const message=
@@ -1114,7 +947,6 @@ function render(){
   disableCells();
 
   return;
-
  }
 
 
@@ -1125,23 +957,19 @@ function render(){
 
   const winner=
    gameData.winner==="X"
-   ?gameData.playerX.name
-   :gameData.playerO.name;
-
+    ?gameData.playerX.name
+    :gameData.playerO.name;
 
   message.textContent=
    "🏆 الفائز: "+winner;
-
 
   highlightWinning(
    getWinningCells(board)
   );
 
-
   disableCells();
 
   return;
-
  }
 
 
@@ -1155,7 +983,6 @@ function render(){
   disableCells();
 
   return;
-
  }
 
 
@@ -1181,37 +1008,37 @@ function render(){
 }
 
 
-/* =========================
-   BOARD
-========================= */
-
 function enableCorrectCells(){
 
- cells.forEach(function(cell,index){
+ cells.forEach(
+  function(cell,index){
 
-  cell.disabled=
-   Boolean(
-    gameData.board &&
-    gameData.board[index]
-   );
+   cell.disabled=
+    Boolean(
+     gameData.board &&
+     gameData.board[index]
+    );
 
- });
+  }
+ );
 
 }
 
 
 function disableCells(){
 
- cells.forEach(function(cell){
+ cells.forEach(
+  function(cell){
 
-  cell.disabled=true;
+   cell.disabled=true;
 
- });
+  }
+ );
 
 }
 
 
-async function play(index){
+window.play=async function(index){
 
  if(
   !gameData ||
@@ -1219,91 +1046,115 @@ async function play(index){
   gameData.winner ||
   gameData.turn!==myPlayer ||
   gameData.board[index]
- )return;
+ ){
 
+  return;
+ }
 
  try{
 
   await db
-  .ref("rooms/"+roomId)
-  .transaction(function(current){
+   .ref("rooms/"+roomId)
+   .transaction(
+    function(current){
 
-   if(!current)return current;
+     if(!current)return current;
 
-   if(
-    !current.playerX ||
-    !current.playerO
-   )return;
+     if(
+      !current.playerX ||
+      !current.playerO
+     ){
 
-   if(current.winner)return;
+      return;
+     }
 
-   if(current.turn!==myPlayer)return;
+     if(current.winner){
 
-   if(current.board[index])return;
+      return;
+     }
 
+     if(current.turn!==myPlayer){
 
-   const board=
-    Array.isArray(current.board)
-    ?[...current.board]
-    :[
-      "","","",
-      "","","",
-      "","",""
-     ];
+      return;
+     }
 
+     if(
+      current.board &&
+      current.board[index]
+     ){
 
-   board[index]=myPlayer;
-
-
-   const winner=
-    checkWinner(board);
-
-
-   let gameWinner="";
+      return;
+     }
 
 
-   if(winner){
-
-    gameWinner=winner;
-
-   }else if(
-    board.every(function(v){
-     return Boolean(v);
-    })
-   ){
-
-    gameWinner="draw";
-
-   }
+     const board=
+      Array.isArray(current.board)
+       ?[...current.board]
+       :[
+        "","","",
+        "","","",
+        "","",""
+       ];
 
 
-   current.board=board;
-
-   current.turn=
-    myPlayer==="X"
-    ?"O"
-    :"X";
-
-   current.winner=gameWinner;
-
-   current.status=
-    gameWinner
-    ?"finished"
-    :"playing";
+     board[index]=myPlayer;
 
 
-   return current;
+     const winner=
+      checkWinner(board);
 
-  });
 
+     let gameWinner="";
+
+
+     if(winner){
+
+      gameWinner=winner;
+
+     }else if(
+      board.every(
+       function(v){
+        return Boolean(v);
+       }
+      )
+     ){
+
+      gameWinner="draw";
+
+     }
+
+
+     current.board=board;
+
+     current.turn=
+      myPlayer==="X"
+       ?"O"
+       :"X";
+
+     current.winner=
+      gameWinner;
+
+     current.status=
+      gameWinner
+       ?"finished"
+       :"playing";
+
+
+     return current;
+
+    }
+   );
 
  }catch(error){
 
-  console.error(error);
+  console.error(
+   "PLAY ERROR:",
+   error
+  );
 
  }
 
-}
+};
 
 
 function checkWinner(board){
@@ -1311,28 +1162,24 @@ function checkWinner(board){
  const lines=[
 
   [0,1,2],
-
   [3,4,5],
-
   [6,7,8],
 
   [0,3,6],
-
   [1,4,7],
-
   [2,5,8],
 
   [0,4,8],
-
   [2,4,6]
 
  ];
 
 
- for(const line of lines){
+ for(
+  const line of lines
+ ){
 
   const[a,b,c]=line;
-
 
   if(
    board[a] &&
@@ -1346,9 +1193,7 @@ function checkWinner(board){
 
  }
 
-
  return "";
-
 }
 
 
@@ -1357,28 +1202,24 @@ function getWinningCells(board){
  const lines=[
 
   [0,1,2],
-
   [3,4,5],
-
   [6,7,8],
 
   [0,3,6],
-
   [1,4,7],
-
-  [2,4,7],
+  [2,5,8],
 
   [0,4,8],
-
   [2,4,6]
 
  ];
 
 
- for(const line of lines){
+ for(
+  const line of lines
+ ){
 
   const[a,b,c]=line;
-
 
   if(
    board[a] &&
@@ -1392,83 +1233,83 @@ function getWinningCells(board){
 
  }
 
-
  return [];
-
 }
 
 
 function highlightWinning(list){
 
- cells.forEach(function(cell,index){
+ cells.forEach(
+  function(cell,index){
 
-  if(list.includes(index)){
+   if(list.includes(index)){
 
-   cell.classList.add("win");
+    cell.classList.add("win");
+
+   }
 
   }
-
- });
+ );
 
 }
 
 
-/* =========================
-   NEW GAME
-========================= */
-
-async function newGame(){
+window.newGame=async function(){
 
  if(
   !roomId ||
   !gameData ||
   !gameData.playerO
- )return;
+ ){
 
+  return;
+ }
 
  try{
 
   await db
-  .ref("rooms/"+roomId)
-  .update({
+   .ref("rooms/"+roomId)
+   .update({
 
-   board:[
-    "","","",
-    "","","",
-    "","",""
-   ],
+    board:[
+     "","","",
+     "","","",
+     "","",""
+    ],
 
-   turn:"X",
+    turn:"X",
 
-   winner:"",
+    winner:"",
 
-   status:"playing"
+    status:"playing"
 
-  });
+   });
 
  }catch(error){
 
-  console.error(error);
+  console.error(
+   "NEW GAME ERROR:",
+   error
+  );
 
  }
 
-}
+};
 
 
-/* =========================
-   COPY ROOM
-========================= */
-
-async function copyRoomCode(){
+window.copyRoomCode=async function(){
 
  if(!roomId)return;
 
-
  try{
 
-  await navigator.clipboard.writeText(roomId);
+  await navigator.clipboard.writeText(
+   roomId
+  );
 
-  alert("✅ تم نسخ كود الغرفة");
+  alert(
+   "✅ تم نسخ كود الغرفة"
+  );
 
  }catch(error){
 
@@ -1479,25 +1320,24 @@ async function copyRoomCode(){
 
  }
 
+};
+
+
+function voiceRef(){
+
+ return db.ref(
+  "rooms/"+roomId+"/voice"
+ );
+
 }
 
 
-/* =========================================================
-   CAMERA + MICROPHONE WEBRTC
-========================================================= */
-
-
-/* =========================
-   CAMERA STATUS
-========================= */
-
-function setCameraStatus(text){
+function setVoiceStatus(text){
 
  const element=
   document.getElementById(
-   "cameraStatus"
+   "voiceStatus"
   );
-
 
  if(element){
 
@@ -1508,44 +1348,34 @@ function setCameraStatus(text){
 }
 
 
-/* =========================
-   CAMERA TOGGLE
-========================= */
-
-async function toggleCamera(){
+window.toggleVoice=async function(){
 
  if(!roomId)return;
 
+ if(!voiceEnabled){
 
- if(!cameraEnabled){
-
-  await startCamera();
+  await startVoice();
 
  }else{
 
-  stopCameraOnly();
+  muteVoice();
 
  }
 
-}
+};
 
 
-/* =========================
-   START CAMERA
-========================= */
-
-async function startCamera(){
+async function startVoice(){
 
  try{
 
   if(!window.isSecureContext){
 
-   setCameraStatus(
-    "❌ الكاميرا تحتاج HTTPS"
+   setVoiceStatus(
+    "❌ المايك يحتاج HTTPS"
    );
 
    return;
-
   }
 
 
@@ -1554,73 +1384,48 @@ async function startCamera(){
    !navigator.mediaDevices.getUserMedia
   ){
 
-   setCameraStatus(
-    "❌ الجهاز لا يدعم الكاميرا"
+   setVoiceStatus(
+    "❌ المتصفح لا يدعم الميكروفون"
    );
 
    return;
-
   }
 
 
   if(localStream){
 
    localStream
-   .getTracks()
-   .forEach(function(track){
+    .getAudioTracks()
+    .forEach(
+     function(track){
 
-    track.enabled=true;
+      track.enabled=true;
 
-   });
+     }
+    );
 
   }else{
 
    localStream=
     await navigator.mediaDevices
-    .getUserMedia({
+     .getUserMedia({
 
-     video:{
-      facingMode:"user",
-      width:{
-       ideal:640
+      audio:{
+       echoCancellation:true,
+       noiseSuppression:true,
+       autoGainControl:true
       },
-      height:{
-       ideal:480
-      }
-     },
 
-     audio:{
-      echoCancellation:true,
-      noiseSuppression:true,
-      autoGainControl:true
-     }
+      video:false
 
-    });
+     });
 
   }
 
 
-  const localVideo=
-   document.getElementById(
-    "localVideo"
-   );
+  voiceEnabled=true;
 
-
-  localVideo.srcObject=
-   localStream;
-
-
-  try{
-
-   await localVideo.play();
-
-  }catch(e){}
-
-
-  cameraEnabled=true;
-
-
-  updateCameraButton();
+  updateVoiceButton();
 
 
   if(
@@ -1629,16 +1434,15 @@ async function startCamera(){
    !gameData.playerO
   ){
 
-   setCameraStatus(
-    "📹 الكاميرا والصوت يعملان — بانتظار صديقك"
+   setVoiceStatus(
+    "🎤 المايك يعمل — بانتظار دخول صديقك"
    );
 
    return;
-
   }
 
 
-  startCameraListeners();
+  startVoiceListeners();
 
 
   if(myPlayer==="X"){
@@ -1655,14 +1459,13 @@ async function startCamera(){
  }catch(error){
 
   console.error(
-   "CAMERA ERROR:",
+   "VOICE ERROR:",
    error
   );
 
+  voiceEnabled=false;
 
-  cameraEnabled=false;
-
-  updateCameraButton();
+  updateVoiceButton();
 
 
   if(
@@ -1670,29 +1473,29 @@ async function startCamera(){
    error.name==="PermissionDeniedError"
   ){
 
-   setCameraStatus(
-    "❌ تم رفض الكاميرا أو المايك"
+   setVoiceStatus(
+    "❌ تم رفض المايك. اسمح للتطبيق باستخدام الميكروفون"
    );
 
   }else if(
    error.name==="NotFoundError"
   ){
 
-   setCameraStatus(
-    "❌ لم يتم العثور على الكاميرا"
+   setVoiceStatus(
+    "❌ لم يتم العثور على ميكروفون"
    );
 
   }else if(
    error.name==="NotReadableError"
   ){
 
-   setCameraStatus(
-    "❌ الكاميرا أو المايك مستخدم من تطبيق آخر"
+   setVoiceStatus(
+    "❌ الميكروفون مستخدم من تطبيق آخر"
    );
 
   }else{
 
-   setCameraStatus(
+   setVoiceStatus(
     "❌ "+error.name
    );
 
@@ -1702,88 +1505,6 @@ async function startCamera(){
 
 }
 
-
-/* =========================
-   UPDATE BUTTON
-========================= */
-
-function updateCameraButton(){
-
- const button=
-  document.getElementById(
-   "cameraBtn"
-  );
-
-
- if(!button)return;
-
-
- if(cameraEnabled){
-
-  button.textContent=
-   "📹 إيقاف الكاميرا";
-
-  button.classList.remove("off");
-
- }else{
-
-  button.textContent=
-   "📹 تشغيل الكاميرا";
-
-  button.classList.add("off");
-
- }
-
-}
-
-
-/* =========================
-   STOP CAMERA ONLY
-========================= */
-
-function stopCameraOnly(){
-
- if(localStream){
-
-  localStream
-  .getVideoTracks()
-  .forEach(function(track){
-
-   track.enabled=false;
-
-  });
-
- }
-
-
- cameraEnabled=false;
-
- updateCameraButton();
-
-
- setCameraStatus(
-  "📹 الكاميرا متوقفة"
- );
-
-}
-
-
-/* =========================
-   VOICE/CAMERA DATABASE PATH
-========================= */
-
-function cameraRef(){
-
- return db.ref(
-  "rooms/"+roomId+"/camera"
- );
-
-}
-
-
-/* =========================
-   CREATE PEER
-========================= */
 
 function createPeerConnection(){
 
@@ -1800,32 +1521,30 @@ function createPeerConnection(){
   );
 
 
- /* LOCAL TRACKS */
-
  if(localStream){
 
   localStream
-  .getTracks()
-  .forEach(function(track){
+   .getTracks()
+   .forEach(
+    function(track){
 
-   peerConnection.addTrack(
-    track,
-    localStream
+     peerConnection.addTrack(
+      track,
+      localStream
+     );
+
+    }
    );
-
-  });
 
  }
 
 
- /* REMOTE TRACKS */
-
  peerConnection.ontrack=
   async function(event){
 
-   const remoteVideo=
+   const audio=
     document.getElementById(
-     "remoteVideo"
+     "remoteAudio"
     );
 
 
@@ -1834,31 +1553,32 @@ function createPeerConnection(){
     event.streams[0]
    ){
 
-    remoteVideo.srcObject=
+    audio.srcObject=
      event.streams[0];
 
 
     try{
 
-     await remoteVideo.play();
+     await audio.play();
 
     }catch(error){
 
-     console.log(error);
+     console.log(
+      "Audio play:",
+      error
+     );
 
     }
 
    }
 
 
-   setCameraStatus(
-    "🟢 الكاميرا والصوت متصلان"
+   setVoiceStatus(
+    "🔊 الصوت متصل"
    );
 
   };
 
-
- /* ICE */
 
  peerConnection.onicecandidate=
   function(event){
@@ -1868,20 +1588,18 @@ function createPeerConnection(){
 
    const path=
     myPlayer==="X"
-    ?"callerCandidates"
-    :"calleeCandidates";
+     ?"callerCandidates"
+     :"calleeCandidates";
 
 
-   cameraRef()
-   .child(path)
-   .push(
-    event.candidate.toJSON()
-   );
+   voiceRef()
+    .child(path)
+    .push(
+     event.candidate.toJSON()
+    );
 
   };
 
-
- /* CONNECTION */
 
  peerConnection.onconnectionstatechange=
   function(){
@@ -1895,8 +1613,8 @@ function createPeerConnection(){
 
    if(state==="connected"){
 
-    setCameraStatus(
-     "🟢 الكاميرا والصوت متصلان"
+    setVoiceStatus(
+     "🔊 الصوت متصل"
     );
 
    }
@@ -1904,8 +1622,8 @@ function createPeerConnection(){
 
    if(state==="connecting"){
 
-    setCameraStatus(
-     "⏳ جاري الاتصال بالكاميرا..."
+    setVoiceStatus(
+     "⏳ جاري الاتصال بالصوت..."
     );
 
    }
@@ -1913,8 +1631,8 @@ function createPeerConnection(){
 
    if(state==="disconnected"){
 
-    setCameraStatus(
-     "⚠️ انقطع الاتصال مؤقتاً"
+    setVoiceStatus(
+     "⚠️ انقطع الصوت مؤقتاً"
     );
 
    }
@@ -1922,8 +1640,8 @@ function createPeerConnection(){
 
    if(state==="failed"){
 
-    setCameraStatus(
-     "❌ فشل اتصال الكاميرا"
+    setVoiceStatus(
+     "❌ فشل اتصال الصوت"
     );
 
    }
@@ -1936,189 +1654,185 @@ function createPeerConnection(){
 }
 
 
-/* =========================
-   START SIGNALING
-========================= */
+function startVoiceListeners(){
 
-function startCameraListeners(){
+ if(voiceListenersStarted){
 
- if(voiceListenersStarted)return;
+  return;
 
+ }
 
  voiceListenersStarted=true;
 
 
- const ref=cameraRef();
+ const ref=voiceRef();
 
-
- /* PLAYER O */
 
  if(myPlayer==="O"){
 
   ref
-  .child("offer")
-  .on(
-   "value",
-   async function(snapshot){
+   .child("offer")
+   .on(
+    "value",
+    async function(snapshot){
 
-    if(!snapshot.exists())return;
+     if(!snapshot.exists())return;
 
 
-    if(!cameraEnabled){
+     if(!voiceEnabled){
 
-     setCameraStatus(
-      "📹 صديقك جاهز — شغّل الكاميرا"
+      setVoiceStatus(
+       "🎤 صديقك جاهز — شغّل المايك"
+      );
+
+      return;
+     }
+
+
+     await handleOffer(
+      snapshot.val()
      );
 
-     return;
-
     }
-
-
-    await handleOffer(
-     snapshot.val()
-    );
-
-   }
-  );
+   );
 
 
   ref
-  .child("callerCandidates")
-  .on(
-   "child_added",
-   async function(snapshot){
+   .child("callerCandidates")
+   .on(
+    "child_added",
+    async function(snapshot){
 
-    await receiveCandidate(
-     snapshot.val()
-    );
+     await receiveCandidate(
+      snapshot.val()
+     );
 
-   }
-  );
+    }
+   );
 
  }
 
 
- /* PLAYER X */
-
  if(myPlayer==="X"){
 
   ref
-  .child("answer")
-  .on(
-   "value",
-   async function(snapshot){
+   .child("answer")
+   .on(
+    "value",
+    async function(snapshot){
 
-    if(
-     !snapshot.exists() ||
-     !peerConnection ||
-     answerCreated
-    )return;
+     if(
+      !snapshot.exists() ||
+      !peerConnection ||
+      answerCreated
+     ){
 
-
-    try{
-
-     answerCreated=true;
+      return;
+     }
 
 
-     await peerConnection
-     .setRemoteDescription(
-      new RTCSessionDescription(
-       snapshot.val()
-      )
-     );
+     try{
+
+      answerCreated=true;
 
 
-     await addPendingCandidates();
+      await peerConnection
+       .setRemoteDescription(
+        new RTCSessionDescription(
+         snapshot.val()
+        )
+       );
 
 
-     setCameraStatus(
-      "🟢 تم الاتصال بالكاميرا والصوت"
-     );
+      await addPendingCandidates();
 
 
-    }catch(error){
+      setVoiceStatus(
+       "🔊 تم الاتصال بالصوت"
+      );
 
-     answerCreated=false;
 
-     console.error(
-      "ANSWER ERROR:",
-      error
-     );
+     }catch(error){
+
+      answerCreated=false;
+
+      console.error(
+       "ANSWER ERROR:",
+       error
+      );
+
+     }
 
     }
-
-   }
-  );
+   );
 
 
   ref
-  .child("calleeCandidates")
-  .on(
-   "child_added",
-   async function(snapshot){
+   .child("calleeCandidates")
+   .on(
+    "child_added",
+    async function(snapshot){
 
-    await receiveCandidate(
-     snapshot.val()
-    );
+     await receiveCandidate(
+      snapshot.val()
+     );
 
-   }
-  );
+    }
+   );
 
  }
 
 }
 
 
-/* =========================
-   CREATE OFFER
-========================= */
-
 async function createOffer(){
 
  if(
-  !cameraEnabled ||
+  !voiceEnabled ||
   myPlayer!=="X" ||
   !gameData ||
   !gameData.playerO
- )return;
+ ){
+
+  return;
+ }
 
 
  createPeerConnection();
 
 
- if(offerCreated)return;
+ if(offerCreated){
+
+  return;
+
+ }
 
 
  try{
 
   const offer=
-   await peerConnection
-   .createOffer();
+   await peerConnection.createOffer();
 
 
   await peerConnection
-  .setLocalDescription(
-   offer
-  );
+   .setLocalDescription(offer);
 
 
-  await cameraRef()
-  .child("offer")
-  .set({
+  await voiceRef()
+   .child("offer")
+   .set({
 
-   type:offer.type,
+    type:offer.type,
+    sdp:offer.sdp
 
-   sdp:offer.sdp
-
-  });
+   });
 
 
   offerCreated=true;
 
 
-  setCameraStatus(
-   "⏳ بانتظار اتصال صديقك..."
+  setVoiceStatus(
+   "⏳ بانتظار اتصال صوت صديقك..."
   );
 
 
@@ -2130,8 +1844,8 @@ async function createOffer(){
   );
 
 
-  setCameraStatus(
-   "❌ تعذر إنشاء اتصال الكاميرا"
+  setVoiceStatus(
+   "❌ تعذر إنشاء الاتصال الصوتي"
   );
 
  }
@@ -2139,16 +1853,15 @@ async function createOffer(){
 }
 
 
-/* =========================
-   CHECK EXISTING OFFER
-========================= */
-
 async function checkExistingOffer(){
 
  if(
-  !cameraEnabled ||
+  !voiceEnabled ||
   myPlayer!=="O"
- )return;
+ ){
+
+  return;
+ }
 
 
  createPeerConnection();
@@ -2157,9 +1870,9 @@ async function checkExistingOffer(){
  try{
 
   const snapshot=
-   await cameraRef()
-   .child("offer")
-   .once("value");
+   await voiceRef()
+    .child("offer")
+    .once("value");
 
 
   if(snapshot.exists()){
@@ -2170,32 +1883,33 @@ async function checkExistingOffer(){
 
   }else{
 
-   setCameraStatus(
-    "📹 الكاميرا تعمل — بانتظار صديقك"
+   setVoiceStatus(
+    "🎤 المايك يعمل — بانتظار صديقك"
    );
 
   }
 
-
  }catch(error){
 
-  console.error(error);
+  console.error(
+   "CHECK OFFER ERROR:",
+   error
+  );
 
  }
 
 }
 
 
-/* =========================
-   HANDLE OFFER
-========================= */
-
 async function handleOffer(offer){
 
  if(
-  !cameraEnabled ||
+  !voiceEnabled ||
   myPlayer!=="O"
- )return;
+ ){
+
+  return;
+ }
 
 
  createPeerConnection();
@@ -2206,47 +1920,42 @@ async function handleOffer(offer){
  ){
 
   return;
-
  }
 
 
  try{
 
   await peerConnection
-  .setRemoteDescription(
-   new RTCSessionDescription(
-    offer
-   )
-  );
+   .setRemoteDescription(
+    new RTCSessionDescription(
+     offer
+    )
+   );
 
 
   await addPendingCandidates();
 
 
   const answer=
-   await peerConnection
-   .createAnswer();
+   await peerConnection.createAnswer();
 
 
   await peerConnection
-  .setLocalDescription(
-   answer
-  );
+   .setLocalDescription(answer);
 
 
-  await cameraRef()
-  .child("answer")
-  .set({
+  await voiceRef()
+   .child("answer")
+   .set({
 
-   type:answer.type,
+    type:answer.type,
+    sdp:answer.sdp
 
-   sdp:answer.sdp
-
-  });
+   });
 
 
-  setCameraStatus(
-   "⏳ جاري الاتصال بالكاميرا والصوت..."
+  setVoiceStatus(
+   "⏳ جاري الاتصال بالصوت..."
   );
 
 
@@ -2258,18 +1967,14 @@ async function handleOffer(offer){
   );
 
 
-  setCameraStatus(
-   "❌ تعذر الاتصال بالكاميرا"
+  setVoiceStatus(
+   "❌ تعذر الاتصال بالصوت"
   );
 
  }
 
 }
 
-
-/* =========================
-   RECEIVE ICE
-========================= */
 
 async function receiveCandidate(candidate){
 
@@ -2281,23 +1986,18 @@ async function receiveCandidate(candidate){
   !peerConnection.remoteDescription
  ){
 
-  remoteCandidates.push(
-   candidate
-  );
+  remoteCandidates.push(candidate);
 
   return;
-
  }
 
 
  try{
 
   await peerConnection
-  .addIceCandidate(
-   new RTCIceCandidate(
-    candidate
-   )
-  );
+   .addIceCandidate(
+    new RTCIceCandidate(candidate)
+   );
 
  }catch(error){
 
@@ -2311,16 +2011,15 @@ async function receiveCandidate(candidate){
 }
 
 
-/* =========================
-   PENDING ICE
-========================= */
-
 async function addPendingCandidates(){
 
  if(
   !peerConnection ||
   !peerConnection.remoteDescription
- )return;
+ ){
+
+  return;
+ }
 
 
  const list=
@@ -2337,11 +2036,11 @@ async function addPendingCandidates(){
   try{
 
    await peerConnection
-   .addIceCandidate(
-    new RTCIceCandidate(
-     candidate
-    )
-   );
+    .addIceCandidate(
+     new RTCIceCandidate(
+      candidate
+     )
+    );
 
   }catch(error){
 
@@ -2357,11 +2056,70 @@ async function addPendingCandidates(){
 }
 
 
-/* =========================
-   STOP EVERYTHING
-========================= */
+function muteVoice(){
 
-function stopCamera(){
+ if(localStream){
+
+  localStream
+   .getAudioTracks()
+   .forEach(
+    function(track){
+
+     track.enabled=false;
+
+    }
+   );
+
+ }
+
+
+ voiceEnabled=false;
+
+ updateVoiceButton();
+
+
+ setVoiceStatus(
+  "🔇 المايك مكتوم"
+ );
+
+}
+
+
+function updateVoiceButton(){
+
+ const button=
+  document.getElementById(
+   "voiceBtn"
+  );
+
+
+ if(!button)return;
+
+
+ if(voiceEnabled){
+
+  button.textContent=
+   "🔇 كتم المايك";
+
+  button.classList.remove(
+   "muted"
+  );
+
+ }else{
+
+  button.textContent=
+   "🎤 تشغيل المايك";
+
+  button.classList.add(
+   "muted"
+  );
+
+ }
+
+}
+
+
+function stopVoice(){
 
  try{
 
@@ -2388,19 +2146,21 @@ function stopCamera(){
  if(localStream){
 
   localStream
-  .getTracks()
-  .forEach(function(track){
+   .getTracks()
+   .forEach(
+    function(track){
 
-   track.stop();
+     track.stop();
 
-  });
+    }
+   );
 
  }
 
 
  localStream=null;
 
- cameraEnabled=false;
+ voiceEnabled=false;
 
  remoteCandidates=[];
 
@@ -2411,69 +2171,55 @@ function stopCamera(){
  answerCreated=false;
 
 
- const localVideo=
+ const audio=
   document.getElementById(
-   "localVideo"
+   "remoteAudio"
   );
 
 
- const remoteVideo=
-  document.getElementById(
-   "remoteVideo"
-  );
+ if(audio){
+
+  audio.srcObject=null;
+
+ }
 
 
- if(localVideo)
-  localVideo.srcObject=null;
-
-
- if(remoteVideo)
-  remoteVideo.srcObject=null;
-
-
- updateCameraButton();
+ updateVoiceButton();
 
 }
 
 
-/* =========================
-   REMOVE CAMERA DATA
-========================= */
-
-async function removeCameraData(){
+async function removeVoiceData(){
 
  if(!roomId)return;
 
-
  try{
 
-  await cameraRef().remove();
+  await voiceRef().remove();
 
  }catch(error){
 
-  console.error(error);
+  console.error(
+   "REMOVE VOICE ERROR:",
+   error
+  );
 
  }
 
 }
 
 
-/* =========================
-   LEAVE ROOM
-========================= */
-
-async function leaveRoom(){
+window.leaveRoom=async function(){
 
  if(!roomId){
 
   location.reload();
 
   return;
-
  }
 
 
- stopCamera();
+ stopVoice();
 
 
  try{
@@ -2499,45 +2245,38 @@ async function leaveRoom(){
    });
 
 
-   await removeCameraData();
+   await removeVoiceData();
 
   }
 
 
  }catch(error){
 
-  console.error(error);
+  console.error(
+   "LEAVE ERROR:",
+   error
+  );
 
  }
 
 
  location.reload();
 
-}
+};
 
-
-/* =========================
-   PAGE CLOSE
-========================= */
 
 window.addEventListener(
  "beforeunload",
  function(){
 
-  stopCamera();
+  stopVoice();
 
  }
 );
 
 
-/* =========================
-   START
-========================= */
-
-updateCameraButton();
-
 console.log(
- "🔥 XO Online + Camera + Audio Ready"
+ "🔥 XO Online جاهز"
 );
 
 </script>
