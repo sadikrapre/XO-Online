@@ -20,6 +20,10 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      - name: Check Gradle
+        run: |
+          gradle --version
+
       - name: Install Android SDK
         run: |
           SDKMANAGER=$(find "$ANDROID_HOME/cmdline-tools" -name sdkmanager -type f | head -1)
@@ -29,13 +33,6 @@ jobs:
           "$SDKMANAGER" \
             "platforms;android-35" \
             "build-tools;35.0.0"
-
-      - name: Install Gradle
-        run: |
-          curl -L https://services.gradle.org/distributions/gradle-8.9-bin.zip -o /tmp/gradle.zip
-          mkdir -p "$HOME/gradle"
-          unzip -q /tmp/gradle.zip -d "$HOME/gradle"
-          echo "$HOME/gradle/gradle-8.9/bin" >> "$GITHUB_PATH"
 
       - name: Create Android project
         run: |
@@ -209,21 +206,24 @@ jobs:
                           ) == PackageManager.PERMISSION_GRANTED
 
                       val resources = request.resources.toSet()
-
                       val grants = mutableListOf<String>()
 
                       if (
                           PermissionRequest.RESOURCE_AUDIO_CAPTURE in resources &&
                           micGranted
                       ) {
-                          grants.add(PermissionRequest.RESOURCE_AUDIO_CAPTURE)
+                          grants.add(
+                              PermissionRequest.RESOURCE_AUDIO_CAPTURE
+                          )
                       }
 
                       if (
                           PermissionRequest.RESOURCE_VIDEO_CAPTURE in resources &&
                           cameraGranted
                       ) {
-                          grants.add(PermissionRequest.RESOURCE_VIDEO_CAPTURE)
+                          grants.add(
+                              PermissionRequest.RESOURCE_VIDEO_CAPTURE
+                          )
                       }
 
                       if (grants.isNotEmpty()) {
@@ -243,7 +243,9 @@ jobs:
                       ViewGroup.LayoutParams.MATCH_PARENT
                   )
 
-                  webView.setBackgroundColor(Color.rgb(5, 6, 13))
+                  webView.setBackgroundColor(
+                      Color.rgb(5, 6, 13)
+                  )
 
                   val settings = webView.settings
 
@@ -254,8 +256,6 @@ jobs:
                   settings.allowFileAccess = false
                   settings.javaScriptCanOpenWindowsAutomatically = true
 
-                  WebView.setWebContentsDebuggingEnabled(false)
-
                   val assetLoader =
                       WebViewAssetLoader.Builder()
                           .addPathHandler(
@@ -264,96 +264,105 @@ jobs:
                           )
                           .build()
 
-                  webView.webViewClient = object : WebViewClient() {
+                  webView.webViewClient =
+                      object : WebViewClient() {
 
-                      override fun shouldInterceptRequest(
-                          view: WebView,
-                          request: WebResourceRequest
-                      ): WebResourceResponse? {
-                          return assetLoader.shouldInterceptRequest(request.url)
+                          override fun shouldInterceptRequest(
+                              view: WebView,
+                              request: WebResourceRequest
+                          ): WebResourceResponse? {
+                              return assetLoader.shouldInterceptRequest(
+                                  request.url
+                              )
+                          }
+
+                          @Suppress("DEPRECATION")
+                          override fun shouldInterceptRequest(
+                              view: WebView,
+                              url: String
+                          ): WebResourceResponse? {
+                              return assetLoader.shouldInterceptRequest(
+                                  Uri.parse(url)
+                              )
+                          }
                       }
 
-                      @Suppress("DEPRECATION")
-                      override fun shouldInterceptRequest(
-                          view: WebView,
-                          url: String
-                      ): WebResourceResponse? {
-                          return assetLoader.shouldInterceptRequest(Uri.parse(url))
-                      }
-                  }
+                  webView.webChromeClient =
+                      object : WebChromeClient() {
 
-                  webView.webChromeClient = object : WebChromeClient() {
+                          override fun onPermissionRequest(
+                              request: PermissionRequest
+                          ) {
 
-                      override fun onPermissionRequest(
-                          request: PermissionRequest
-                      ) {
+                              runOnUiThread {
 
-                          runOnUiThread {
+                                  if (
+                                      request.origin.host !=
+                                      "appassets.androidplatform.net"
+                                  ) {
+                                      request.deny()
+                                      return@runOnUiThread
+                                  }
 
-                              if (
-                                  request.origin.host !=
-                                  "appassets.androidplatform.net"
-                              ) {
-                                  request.deny()
-                                  return@runOnUiThread
-                              }
+                                  val needsMic =
+                                      request.resources.contains(
+                                          PermissionRequest.RESOURCE_AUDIO_CAPTURE
+                                      )
 
-                              val needsMic =
-                                  request.resources.contains(
-                                      PermissionRequest.RESOURCE_AUDIO_CAPTURE
-                                  )
+                                  val needsCamera =
+                                      request.resources.contains(
+                                          PermissionRequest.RESOURCE_VIDEO_CAPTURE
+                                      )
 
-                              val needsCamera =
-                                  request.resources.contains(
-                                      PermissionRequest.RESOURCE_VIDEO_CAPTURE
-                                  )
+                                  val micGranted =
+                                      ContextCompat.checkSelfPermission(
+                                          this@MainActivity,
+                                          Manifest.permission.RECORD_AUDIO
+                                      ) ==
+                                      PackageManager.PERMISSION_GRANTED
 
-                              val micGranted =
-                                  ContextCompat.checkSelfPermission(
-                                      this@MainActivity,
-                                      Manifest.permission.RECORD_AUDIO
-                                  ) == PackageManager.PERMISSION_GRANTED
+                                  val cameraGranted =
+                                      ContextCompat.checkSelfPermission(
+                                          this@MainActivity,
+                                          Manifest.permission.CAMERA
+                                      ) ==
+                                      PackageManager.PERMISSION_GRANTED
 
-                              val cameraGranted =
-                                  ContextCompat.checkSelfPermission(
-                                      this@MainActivity,
-                                      Manifest.permission.CAMERA
-                                  ) == PackageManager.PERMISSION_GRANTED
+                                  if (
+                                      (!needsMic || micGranted) &&
+                                      (!needsCamera || cameraGranted)
+                                  ) {
+                                      request.grant(request.resources)
+                                      return@runOnUiThread
+                                  }
 
-                              if (
-                                  (!needsMic || micGranted) &&
-                                  (!needsCamera || cameraGranted)
-                              ) {
-                                  request.grant(request.resources)
-                                  return@runOnUiThread
-                              }
+                                  pendingRequest = request
 
-                              pendingRequest = request
+                                  val permissions =
+                                      mutableListOf<String>()
 
-                              val permissions = mutableListOf<String>()
+                                  if (needsMic && !micGranted) {
+                                      permissions.add(
+                                          Manifest.permission.RECORD_AUDIO
+                                      )
+                                  }
 
-                              if (needsMic && !micGranted) {
-                                  permissions.add(
-                                      Manifest.permission.RECORD_AUDIO
-                                  )
-                              }
+                                  if (needsCamera && !cameraGranted) {
+                                      permissions.add(
+                                          Manifest.permission.CAMERA
+                                      )
+                                  }
 
-                              if (needsCamera && !cameraGranted) {
-                                  permissions.add(
-                                      Manifest.permission.CAMERA
-                                  )
-                              }
-
-                              if (permissions.isNotEmpty()) {
-                                  mediaPermissionLauncher.launch(
-                                      permissions.toTypedArray()
-                                  )
-                              } else {
-                                  request.deny()
+                                  if (permissions.isNotEmpty()) {
+                                      mediaPermissionLauncher.launch(
+                                          permissions.toTypedArray()
+                                      )
+                                  } else {
+                                      request.deny()
+                                  }
                               }
                           }
                       }
-                  }
 
                   setContentView(webView)
 
